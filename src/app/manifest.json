@@ -1,0 +1,27 @@
+{
+	"name": "SIGN OF PAIN",
+	"short_name": "SIGN OF PAIN",
+	"description": "The SIGN OF PAIN Library.",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#080808",
+	"theme_color": "#080808",
+	"orientation": "portrait",
+	"icons": [
+		{
+			"src": "/icons/icon.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "/icons/icon.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	],
+	"categories": ["books", "entertainment"],
+	"lang": "en",
+	"dir": "ltr"
+}

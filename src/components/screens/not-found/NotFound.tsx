@@ -15,7 +15,7 @@ const NotFound: FC = () => {
 					Sorry, we could not find what you were looking for.
 				</p>
 				<Link className={styles.button} href={PUBLIC_ROUTE.HOME}>
-					Continue Shopping
+					Continue
 				</Link>
 			</Container>
 		</section>

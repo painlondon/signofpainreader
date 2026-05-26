@@ -11,6 +11,7 @@ import Scripts from '@/components/layout/scripts/Scripts'
 import { useMenu } from '@/hooks/api/menu/useMenu.hook'
 import Provider from '@/providers/Provider'
 import type { Metadata, Viewport } from 'next'
+import { unstable_noStore } from 'next/cache'
 import { Cinzel, DM_Sans, EB_Garamond, Lora } from 'next/font/google'
 import type { PropsWithChildren } from 'react'
 
@@ -68,6 +69,8 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: PropsWithChildren) {
+	unstable_noStore()
+
 	const { header, footer } = await useMenu()
 
 	return (

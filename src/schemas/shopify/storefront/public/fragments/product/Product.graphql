@@ -28,6 +28,18 @@ fragment Product on Product {
 			}
 		}
 	}
+	donatePage: metafield(namespace: "product", key: "donate_page") {
+		value
+	}
+	donateButtonLabel: metafield(
+		namespace: "product"
+		key: "donate_button_label"
+	) {
+		value
+	}
+	donateButtonLink: metafield(namespace: "product", key: "donate_button_link") {
+		value
+	}
 	gatewayHeading: metafield(namespace: "product", key: "gateway_heading") {
 		value
 	}

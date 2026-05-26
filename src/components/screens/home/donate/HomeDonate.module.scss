@@ -1,0 +1,94 @@
+.wrapper {
+	@apply py-32 text-center;
+}
+.box {
+	@apply mx-auto flex flex-col items-center;
+	max-width: 800px;
+}
+.heading {
+	@apply mb-6 font-cinzel font-bold text-gray-200;
+	font-size: 48px;
+}
+.description {
+	@apply font-garamond italic mb-12 leading-md text-gray-300;
+	max-width: 500px;
+	font-size: 20px;
+}
+.ornament {
+	@apply font-semibold mb-6 text-red-400;
+	font-size: 12px;
+	letter-spacing: 0.6em;
+}
+.button {
+	@apply red-button h-14 px-12 gap-2.5;
+
+	> svg {
+		@apply w-6 h-6;
+	}
+}
+.note {
+	@apply mt-5 uppercase opacity-60 leading-lg text-gray-300;
+	font-size: 12px;
+	letter-spacing: 0.15em;
+}
+.divider {
+	@apply line-divider;
+}
+
+@media (max-width: 1400px) {
+	.button {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 1000px) {
+	.wrapper {
+		@apply py-24;
+	}
+	.heading {
+		font-size: 40px;
+	}
+	.description {
+		@apply mb-10;
+	}
+	.button {
+		@apply px-10;
+	}
+}
+
+@media (max-width: 800px) {
+	.wrapper {
+		@apply py-20;
+	}
+	.heading {
+		font-size: 35px;
+	}
+	.description {
+		@apply leading-lg;
+		font-size: 18px;
+	}
+	.teaser {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 600px) {
+	.teasers {
+		@apply flex-col;
+	}
+}
+
+@media (max-width: 400px) {
+	.heading {
+		font-size: 30px;
+	}
+	.foot {
+		@apply w-full;
+	}
+	.button {
+		@apply w-full px-3;
+	}
+	.note {
+		font-size: 11px;
+	}
+}

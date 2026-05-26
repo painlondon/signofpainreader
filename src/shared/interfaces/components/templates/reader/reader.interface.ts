@@ -4,10 +4,14 @@ import type {
 	TypeReaderTextWidth,
 } from '@/shared/types/components/templates/reader/reader.type'
 import type { Dispatch, RefObject, SetStateAction } from 'react'
+import type { IHome } from '../../screens/home/home.interface'
 
-export interface IReader extends IReaderGatewayContent {
+export interface IReader extends IReaderGatewayContent, IHome {
 	url: string
 	gatewayPage?: number
+	donatePage?: number
+	donateButtonLabel?: string
+	donateButtonLink?: string
 }
 
 export interface IReaderHook {

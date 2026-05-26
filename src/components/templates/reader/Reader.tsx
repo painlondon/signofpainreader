@@ -1,8 +1,10 @@
 'use client'
 
+import CoinsIcon from '@/components/icons/CoinsIcon'
 import { useReader } from '@/hooks/components/templates/reader/useReader.hook'
 import { useToggleScrollBar } from '@/hooks/helpers/toggle-scrollbar/useToggleScrollBar.hook'
 import type { IReader } from '@/shared/interfaces/components/templates/reader/reader.interface'
+import Link from 'next/link'
 import type { FC } from 'react'
 import Portal from '../portal/Portal'
 import styles from './Reader.module.scss'
@@ -12,7 +14,15 @@ import ReaderNavigation from './navigation/ReaderNavigation'
 import ReaderPanel from './panel/ReaderPanel'
 import ReaderProgress from './progress/ReaderProgress'
 
-const Reader: FC<IReader> = ({ url, gatewayPage, content }) => {
+const Reader: FC<IReader> = ({
+	url,
+	donatePage,
+	gatewayPage,
+	content,
+	page,
+	donateButtonLabel,
+	donateButtonLink,
+}) => {
 	const {
 		isGatewayOpen,
 		setIsGatewayOpen,
@@ -106,6 +116,20 @@ const Reader: FC<IReader> = ({ url, gatewayPage, content }) => {
 								setIsGatewayOpen={setIsGatewayOpen}
 								content={content}
 							/>
+						)}
+					{donatePage &&
+						Math.round(percentRead) >= donatePage &&
+						donateButtonLabel &&
+						donateButtonLink && (
+							<Link
+								className={styles.donate}
+								href={donateButtonLink}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<span>{donateButtonLabel}</span>
+								<CoinsIcon />
+							</Link>
 						)}
 				</div>
 			</div>

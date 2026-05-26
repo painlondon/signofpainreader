@@ -64,5 +64,20 @@ query HomePage {
 		coming_teasers: field(key: "coming_teasers") {
 			value
 		}
+		donate_heading: field(key: "donate_heading") {
+			value
+		}
+		donate_description: field(key: "donate_description") {
+			value
+		}
+		donate_button_label: field(key: "donate_button_label") {
+			value
+		}
+		donate_button_link: field(key: "donate_button_link") {
+			value
+		}
+		donate_note: field(key: "donate_note") {
+			value
+		}
 	}
 }

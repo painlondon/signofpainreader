@@ -1,5 +1,5 @@
 .scroll {
-	@apply w-full h-full flex flex-col items-center overflow-y-auto overflow-x-hidden;
+	@apply w-full h-full py-14 flex flex-col items-center overflow-y-auto overflow-x-hidden;
 	scroll-behavior: smooth;
 	scrollbar-width: thin;
 	scrollbar-color: rgba(192, 21, 42, 0.18) transparent;
@@ -123,6 +123,9 @@
 }
 
 @media (max-width: 600px) {
+	.scroll {
+		@apply py-8;
+	}
 	.head {
 		@apply pb-8;
 	}

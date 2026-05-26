@@ -2,8 +2,7 @@
 	backdrop-filter: blur(8px);
 }
 .cols {
-	@apply py-4 grid items-center justify-between gap-3;
-	grid-template-columns: 1fr auto 1fr;
+	@apply py-4 flex items-center justify-center gap-3;
 }
 .bar {
 	@apply h-1 rounded-full bg-red-600;

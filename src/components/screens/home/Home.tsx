@@ -3,9 +3,9 @@ import type { IHome } from '@/shared/interfaces/components/screens/home/home.int
 import type { FC } from 'react'
 import HomeAbout from './about/HomeAbout'
 import HomeComing from './coming/HomeComing'
+import HomeDonate from './donate/HomeDonate'
 import HomeHero from './hero/HomeHero'
 import HomeProduct from './product/HomeProduct'
-import HomeReader from './reader/HomeReader'
 import HomeSocial from './social/HomeSocial'
 
 const Home: FC<IHome> = ({ page }) => {
@@ -15,10 +15,19 @@ const Home: FC<IHome> = ({ page }) => {
 			<HomeProduct page={page} />
 			<HomeAbout page={page} />
 			<HomeSocial page={page} />
-			<HomeReader page={page} />
+			{/* <HomeReader page={page} /> */}
+			<HomeDonate page={page} />
 			<HomeComing page={page} />
 			<Reader
+				page={page}
 				url={page.product.reference.epub.reference.url}
+				donatePage={
+					page.product.reference?.donatePage?.value
+						? Number(page.product.reference.donatePage.value)
+						: undefined
+				}
+				donateButtonLabel={page.product?.reference?.donateButtonLabel?.value}
+				donateButtonLink={page.product?.reference?.donateButtonLink?.value}
 				gatewayPage={
 					page.product.reference?.gatewayPage?.value
 						? Number(page.product.reference.gatewayPage.value)

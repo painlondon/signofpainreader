@@ -65,6 +65,7 @@ const ReaderNavigation: FC<IReaderNavigation> = ({
 					type="button"
 					className={formatClassName([
 						styles.control,
+						styles.fullscreen,
 						isFullscreen && styles.active,
 					])}
 					onClick={toggleFs}

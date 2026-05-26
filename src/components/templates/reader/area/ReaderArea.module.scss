@@ -100,7 +100,7 @@
 	}
 }
 .chapter + .chapter {
-	@apply mt-12 border-t border-t-red-100;
+	@apply mt-12 pt-8 border-t border-t-red-100;
 }
 .bottom {
 	@apply pb-24;

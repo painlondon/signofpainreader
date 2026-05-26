@@ -46,7 +46,7 @@
 	}
 }
 .field {
-	@apply h-10 border-b flex gap-2.5 border-b-red-100 bg-gray-600;
+	@apply border-b flex gap-2.5 px-2.5 border-b-red-100 bg-gray-600;
 }
 .find {
 	@apply flex items-center justify-center text-gray-300;
@@ -56,7 +56,7 @@
 	}
 }
 .input {
-	@apply bg-transparent;
+	@apply h-12 bg-transparent;
 	flex: 1;
 	font-size: 14px;
 }

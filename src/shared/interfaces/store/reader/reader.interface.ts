@@ -1,7 +1,8 @@
+import type { TypeReaderFontFamily } from '@/shared/types/components/templates/reader/reader.type'
 import type { IReaderBookProgress } from '../../components/templates/reader/reader.interface'
 
 interface IReaderSettings {
-	fontFamily: 'garamond' | 'sans' | 'serif' | 'mono'
+	fontFamily: TypeReaderFontFamily
 	fontSize: number
 	lineHeight: number
 	width: 'narrow' | 'normal' | 'wide'

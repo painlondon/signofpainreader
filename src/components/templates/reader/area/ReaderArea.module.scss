@@ -46,6 +46,22 @@
 .content {
 	@apply mx-auto w-full;
 
+	&.sans {
+		@apply font-sans;
+	}
+
+	&.garamond {
+		@apply font-garamond;
+	}
+
+	&.cinzel {
+		@apply font-cinzel;
+	}
+
+	&.lora {
+		@apply font-lora;
+	}
+
 	p {
 		@apply mb-6;
 		text-indent: 1em;

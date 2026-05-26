@@ -38,7 +38,7 @@ const ReaderArea: FC<IReaderArea> = ({
 						<div
 							className={formatClassName([
 								styles.content,
-								`font-${settings.fontFamily}`,
+								styles[settings.fontFamily],
 							])}
 							style={{
 								fontSize: `${settings.fontSize}px`,

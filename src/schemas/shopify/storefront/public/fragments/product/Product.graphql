@@ -1,0 +1,70 @@
+fragment Product on Product {
+	title
+	handle
+	descriptionHtml
+	images(first: 1) {
+		nodes {
+			url(
+				transform: {
+					preferredContentType: WEBP
+					crop: CENTER
+					maxWidth: 600
+					maxHeight: 850
+					scale: 2
+				}
+			)
+			altText
+		}
+	}
+	collections(first: 1) {
+		nodes {
+			title
+		}
+	}
+	epub: metafield(namespace: "product", key: "epub") {
+		reference {
+			... on GenericFile {
+				url
+			}
+		}
+	}
+	gatewayHeading: metafield(namespace: "product", key: "gateway_heading") {
+		value
+	}
+	gatewayDescription: metafield(
+		namespace: "product"
+		key: "gateway_description"
+	) {
+		value
+	}
+	gatewaySubmit: metafield(namespace: "product", key: "gateway_submit") {
+		value
+	}
+	gatewaySkip: metafield(namespace: "product", key: "gateway_skip") {
+		value
+	}
+	gatewaySuccess: metafield(namespace: "product", key: "gateway_success") {
+		value
+	}
+	gatewayError: metafield(namespace: "product", key: "gateway_error") {
+		value
+	}
+	gatewayPage: metafield(namespace: "product", key: "gateway_page") {
+		value
+	}
+	caption: metafield(namespace: "product", key: "caption") {
+		value
+	}
+	length: metafield(namespace: "product", key: "length") {
+		value
+	}
+	quote: metafield(namespace: "product", key: "quote") {
+		value
+	}
+	note: metafield(namespace: "product", key: "note") {
+		value
+	}
+	button: metafield(namespace: "product", key: "button") {
+		value
+	}
+}

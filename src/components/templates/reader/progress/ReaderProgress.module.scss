@@ -1,0 +1,41 @@
+.wrapper {
+	backdrop-filter: blur(8px);
+}
+.cols {
+	@apply py-4 grid items-center justify-between gap-3;
+	grid-template-columns: 1fr auto 1fr;
+}
+.bar {
+	@apply h-1 rounded-full bg-red-600;
+
+	> span {
+		@apply block h-full bg-red-400;
+		border-radius: inherit;
+		transition: width 200ms ease-in-out;
+	}
+}
+.progress,
+.time,
+.chapter {
+	@apply text-red-400;
+	font-size: 12px;
+	letter-spacing: 0.12em;
+}
+.progress {
+	@apply flex flex-wrap gap-3.5;
+}
+.time {
+	@apply text-center;
+}
+.chapter {
+	@apply text-right;
+}
+.percent {
+	font-size: 14px;
+}
+.value {
+	@apply opacity-80 text-red-400;
+}
+.separator {
+	@apply mx-2.5;
+}

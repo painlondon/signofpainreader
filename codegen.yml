@@ -1,0 +1,26 @@
+generates:
+  ./src/__generated__/shopify/storefront.ts:
+    schema:
+      - https://5ejtbn-as.myshopify.com/api/2026-01/graphql.json:
+          headers:
+            X-Shopify-Storefront-Access-Token: e9b605252046264ed45ab8858e144b6c
+            Content-Type: application/json
+
+    documents: 'src/schemas/shopify/storefront/**/*.graphql'
+
+    plugins:
+      - typescript-operations
+      - typed-document-node
+
+    config:
+      skipTypename: true
+      preResolveTypes: true
+      strictNullChecks: true
+      maybeValue: T
+      scalars:
+        DateTime: string
+        Decimal: string
+        HTML: string
+        URL: string
+        UnsignedInt64: string
+        Color: string

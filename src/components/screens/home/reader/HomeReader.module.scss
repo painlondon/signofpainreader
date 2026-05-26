@@ -1,0 +1,64 @@
+.wrapper {
+	@apply py-32 text-center;
+}
+.box {
+	@apply mx-auto mb-24;
+	max-width: 700px;
+}
+.heading {
+	@apply mb-4 font-cinzel font-bold text-gray-200;
+	font-size: 48px;
+}
+.description {
+	@apply font-garamond italic text-gray-300;
+	font-size: 18px;
+}
+.button {
+	@apply red-button h-14 px-12 mx-auto;
+}
+.divider {
+	@apply line-divider;
+}
+
+@media (max-width: 1400px) {
+	.button {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 1000px) {
+	.wrapper {
+		@apply py-24;
+	}
+	.box {
+		@apply mb-20;
+	}
+	.heading {
+		font-size: 40px;
+	}
+}
+
+@media (max-width: 800px) {
+	.wrapper {
+		@apply py-20;
+	}
+	.heading {
+		@apply mb-3;
+		font-size: 35px;
+	}
+	.description {
+		@apply leading-lg;
+	}
+}
+
+@media (max-width: 400px) {
+	.box {
+		@apply mb-14;
+	}
+	.heading {
+		font-size: 30px;
+	}
+	.button {
+		@apply w-full px-3;
+	}
+}

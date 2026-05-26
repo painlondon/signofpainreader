@@ -1,0 +1,154 @@
+.toc,
+.search,
+.settings {
+	@apply animate-slideFromLeft w-full flex flex-col justify-between gap-10 items-start py-10 absolute top-0 bottom-0 left-0 z-1 border bg-gray-500 border-red-100 overflow-y-auto;
+	max-width: 500px;
+}
+.wrapper {
+	@apply w-full flex flex-col;
+}
+.settings {
+	@apply h-full overflow-auto;
+
+	.wrapper {
+		@apply gap-5;
+	}
+}
+.head {
+	@apply z-1 px-5 pb-3.5 border-b border-b-red-100;
+}
+.heading {
+	@apply uppercase mb-1.5 font-bold text-red-400;
+	font-size: 12px;
+	letter-spacing: 0.45em;
+}
+.name {
+	@apply leading-md overflow-hidden text-ellipsis whitespace-nowrap text-gray-300;
+	font-size: 12px;
+}
+.chapter {
+	@apply cursor-pointer py-3 px-5 leading-md border-l-2 border-l-transparent whitespace-nowrap overflow-hidden text-ellipsis text-gray-300 transition-colors;
+	font-size: 12px;
+	letter-spacing: 0.07em;
+
+	& > span {
+		@apply uppercase block opacity-90 mb-1 font-semibold text-red-400;
+		font-size: 10px;
+	}
+
+	&:hover,
+	&.active {
+		@apply bg-red-600 text-gray-200;
+	}
+
+	&.active {
+		@apply border-l-red-400;
+	}
+}
+.field {
+	@apply h-10 border-b flex gap-2.5 border-b-red-100 bg-gray-600;
+}
+.find {
+	@apply flex items-center justify-center text-gray-300;
+
+	> svg {
+		@apply w-4 h-4;
+	}
+}
+.input {
+	@apply bg-transparent;
+	flex: 1;
+	font-size: 14px;
+}
+.close {
+	@apply cursor-pointer text-gray-300;
+
+	> svg {
+		@apply w-4 h-4;
+	}
+}
+.empty {
+	@apply p-5 text-center text-gray-300;
+	font-size: 12px;
+}
+.results {
+	@apply h-full overflow-auto;
+}
+.result {
+	@apply cursor-pointer py-3 px-4 border-b border-b-red-100 transition-colors;
+
+	> span {
+		@apply block;
+
+		&:first-child {
+			@apply mb-1 text-red-400;
+			font-size: 10px;
+			letter-spacing: 0.18em;
+		}
+
+		&:last-child {
+			@apply leading-md text-gray-300;
+			font-size: 12px;
+		}
+	}
+}
+.label {
+	@apply uppercase font-semibold mb-2.5 text-red-400;
+	font-size: 11px;
+	letter-spacing: 0.4em;
+}
+.options {
+	@apply grid gap-1.5;
+	grid-template-columns: repeat(2, 1fr);
+	font-size: 12px;
+	letter-spacing: 0.08em;
+}
+.option,
+.value {
+	@apply px-4;
+}
+.option,
+.toggle,
+.value {
+	@apply h-11 flex items-center justify-center gap-2.5 border bg-transparent border-white/10 text-gray-300 transition-colors;
+
+	&:hover,
+	&.active {
+		@apply border-red-400 text-gray-200;
+	}
+}
+.box {
+	@apply flex items-center gap-2.5;
+}
+.toggle {
+	@apply w-11 border-white/10 text-gray-300;
+	font-size: 18px;
+}
+.value {
+	@apply text-center;
+	flex: 1;
+	font-size: 14px;
+}
+.circle {
+	@apply w-3.5 h-3.5 border shrink-0;
+	border-radius: 50%;
+	border-color: rgba(128, 128, 128, 0.3);
+}
+.foot {
+	@apply font-garamond red-button min-h-11 px-8 flex items-center gap-2.5;
+
+	> svg {
+		@apply w-5 h-6;
+	}
+}
+
+@media (max-width: 600px) {
+	.toc,
+	.search,
+	.settings {
+		@apply max-w-full py-6;
+	}
+	.label {
+		font-size: 10px;
+	}
+}

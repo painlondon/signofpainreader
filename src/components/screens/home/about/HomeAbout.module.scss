@@ -1,0 +1,85 @@
+.wrapper {
+	@apply py-32 text-center;
+}
+.heading {
+	@apply mb-16 font-cinzel text-gray-300;
+	font-size: 32px;
+
+	> span {
+		@apply block;
+
+		&:first-child {
+			@apply mb-1 text-gray-200;
+		}
+
+		&:last-child {
+			@apply text-gray-300;
+		}
+	}
+}
+.cards {
+	@apply grid border border-solid mx-auto;
+	max-width: 800px;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1px;
+	background-color: rgba(192, 21, 42, 0.15);
+	border-color: rgba(192, 21, 42, 0.15);
+}
+.card {
+	@apply py-12 px-8 bg-gray-600 transition-colors;
+
+	&:hover {
+		background: rgba(192, 21, 42, 0.06);
+	}
+}
+.number {
+	@apply block font-cinzel opacity-70 mb-6 text-red-400;
+	font-size: 32px;
+}
+.description {
+	@apply font-garamond italic leading-md text-gray-200;
+	font-size: 18px;
+}
+.divider {
+	@apply line-divider;
+}
+
+@media (max-width: 1000px) {
+	.wrapper {
+		@apply py-24;
+	}
+	.heading {
+		@apply mb-12;
+	}
+}
+
+@media (max-width: 800px) {
+	.wrapper {
+		@apply py-20;
+	}
+	.heading {
+		font-size: 30px;
+	}
+	.cards {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	.card {
+		@apply p-8;
+	}
+	.number {
+		@apply mb-4;
+	}
+}
+
+@media (max-width: 600px) {
+	.heading {
+		@apply mb-10;
+		font-size: 26px;
+	}
+}
+
+@media (max-width: 400px) {
+	.heading {
+		font-size: 24px;
+	}
+}

@@ -1,0 +1,15 @@
+.field {
+	@apply w-full;
+}
+.label {
+	@apply block mb-2;
+}
+.error {
+	@apply block mb-2;
+	font-size: 12px;
+	color: red;
+}
+.input {
+	@apply w-full;
+	border-radius: inherit;
+}

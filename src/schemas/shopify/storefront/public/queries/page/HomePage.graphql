@@ -1,0 +1,68 @@
+query HomePage {
+	home: metaobject(handle: { handle: "home", type: "page" }) {
+		hero_caption: field(key: "hero_caption") {
+			value
+		}
+		hero_heading_1: field(key: "hero_heading_1") {
+			value
+		}
+		hero_heading_2: field(key: "hero_heading_2") {
+			value
+		}
+		hero_description: field(key: "hero_description") {
+			value
+		}
+		hero_button: field(key: "hero_button") {
+			value
+		}
+		hero_note: field(key: "hero_note") {
+			value
+		}
+		product: field(key: "product") {
+			reference {
+				... on Product {
+					...Product
+				}
+			}
+		}
+		about_heading_1: field(key: "about_heading_1") {
+			value
+		}
+		about_heading_2: field(key: "about_heading_2") {
+			value
+		}
+		about_cards: field(key: "about_cards") {
+			value
+		}
+		community_heading: field(key: "community_heading") {
+			value
+		}
+		community_socials: field(key: "community_socials") {
+			references(first: 10) {
+				nodes {
+					... on Metaobject {
+						...Social
+					}
+				}
+			}
+		}
+		reader_heading: field(key: "reader_heading") {
+			value
+		}
+		reader_description: field(key: "reader_description") {
+			value
+		}
+		reader_button: field(key: "reader_button") {
+			value
+		}
+		coming_heading: field(key: "coming_heading") {
+			value
+		}
+		coming_description: field(key: "coming_description") {
+			value
+		}
+		coming_teasers: field(key: "coming_teasers") {
+			value
+		}
+	}
+}

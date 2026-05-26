@@ -1,0 +1,8 @@
+.logo {
+	@apply font-cinzel font-bold;
+	letter-spacing: 0.35em;
+
+	& > span {
+		color: #c0152a;
+	}
+}

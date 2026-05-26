@@ -1,0 +1,119 @@
+.section {
+	@apply relative;
+}
+.wrapper {
+	@apply min-h-screen py-44 flex items-center justify-center text-center;
+}
+.overlay {
+	@apply w-full h-full absolute top-0 bottom-0 left-0 right-0 z-0;
+	background:
+		radial-gradient(
+			ellipse 60% 50% at 50% 100%,
+			rgba(192, 21, 42, 0.18) 0%,
+			transparent 70%
+		),
+		radial-gradient(
+			ellipse 40% 40% at 20% 60%,
+			rgba(107, 10, 20, 0.12) 0%,
+			transparent 60%
+		),
+		#080808;
+}
+.info {
+	@apply relative flex flex-col items-center;
+}
+.caption {
+	@apply uppercase mb-8 font-semibold text-red-400;
+	font-size: 11px;
+	letter-spacing: 0.5em;
+}
+.heading {
+	@apply mb-7 font-cinzel font-black leading-xs text-gray-200;
+	font-size: 110px;
+	letter-spacing: -0.01em;
+
+	& > span {
+		@apply block text-red-400;
+	}
+}
+.description {
+	@apply font-garamond italic leading-md mb-14 text-gray-300;
+	max-width: 580px;
+	font-size: clamp(16px, 2.5vw, 22px);
+}
+.button {
+	@apply red-button h-14 px-12;
+}
+.note {
+	@apply mt-5 uppercase opacity-60 text-gray-300;
+	font-size: 12px;
+	letter-spacing: 0.15em;
+}
+.scroll {
+	@apply absolute bottom-0 left-0 right-0 mx-auto pb-12 uppercase flex flex-col items-center gap-2 opacity-40 text-gray-300;
+	font-size: 10px;
+	letter-spacing: 0.3em;
+}
+.bar {
+	@apply animate-pulse h-10;
+	width: 1px;
+	background: linear-gradient(to bottom, #c0152a, transparent);
+}
+.divider {
+	@apply line-divider;
+}
+
+@media (max-width: 1400px) {
+	.heading {
+		@apply leading-normal mb-6;
+		font-size: 90px;
+	}
+	.description {
+		@apply mb-11;
+		font-size: 20px;
+	}
+	.button {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 800px) {
+	.wrapper {
+		@apply py-36;
+	}
+	.caption {
+		@apply mb-6;
+	}
+	.heading {
+		@apply mb-5;
+		font-size: 70px;
+	}
+	.description {
+		@apply mb-10;
+		font-size: 18px;
+	}
+	.button {
+		@apply px-10;
+	}
+}
+
+@media (max-width: 400px) {
+	.wrapper {
+		@apply pt-28;
+	}
+	.caption {
+		@apply mb-4 leading-xl;
+	}
+	.heading {
+		font-size: 65px;
+	}
+	.box {
+		@apply w-full;
+	}
+	.button {
+		@apply w-full px-3;
+	}
+	.note {
+		font-size: 11px;
+	}
+}

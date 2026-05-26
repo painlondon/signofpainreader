@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+
+* {
+	scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+ul,
+li {
+	@apply list-none;
+}
+
+a {
+	@apply inline-block;
+}
+
+input,
+input:focus {
+	outline: none;
+}
+
+body {
+	@apply min-h-screen flex flex-col font-sans leading-sm bg-black text-gray-200;
+	font-size: 16px;
+}
+
+main {
+	@apply flex flex-col;
+	flex: 1;
+}

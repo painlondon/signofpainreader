@@ -1,0 +1,183 @@
+.wrapper {
+	@apply py-32 flex items-center justify-center gap-40;
+}
+.book {
+	@apply cursor-pointer relative border flex flex-col items-center justify-center py-8 px-6 text-center;
+	min-width: 280px;
+	max-width: 280px;
+	min-height: 400px;
+	max-height: 400px;
+	background: linear-gradient(135deg, #1a0a0d 0%, #2d0d13 40%, #0d0305 100%);
+	border-color: rgba(192, 21, 42, 0.4);
+	box-shadow:
+		0 0 80px rgba(192, 21, 42, 0.25),
+		0 40px 80px rgba(0, 0, 0, 0.8),
+		inset 0 0 60px rgba(0, 0, 0, 0.5);
+	transition:
+		transform 400ms ease-in-out,
+		box-shadow 400ms linear;
+
+	&:hover {
+		transform: translateY(-8px) rotateY(-3deg);
+		box-shadow:
+			0 0 100px rgba(192, 21, 42, 0.35),
+			0 60px 100px rgba(0, 0, 0, 0.9);
+	}
+}
+.author {
+	@apply uppercase font-cinzel opacity-80 mb-5 text-red-400;
+	font-size: 9px;
+	letter-spacing: 0.5em;
+}
+.ornament {
+	@apply w-10 bg-red-400 my-4 mx-auto opacity-60;
+	height: 1px;
+}
+.name {
+	@apply font-cinzel font-bold my-2 text-gray-200;
+	max-width: 150px;
+	font-size: 28px;
+	letter-spacing: 0.05em;
+}
+.note {
+	@apply font-garamond italic leading-md mt-4 text-gray-300;
+	font-size: 13px;
+}
+.library {
+	@apply font-cinzel absolute bottom-6 opacity-60 text-red-400;
+	font-size: 8px;
+	letter-spacing: 0.4em;
+}
+.info {
+	max-width: 600px;
+}
+.caption {
+	@apply flex items-center gap-3 uppercase mb-5 font-semibold text-red-400;
+	font-size: 10px;
+	letter-spacing: 0.5em;
+
+	&::after {
+		@apply max-w-16 opacity-30 bg-red-400;
+		content: '';
+		flex: 1;
+		height: 1px;
+	}
+}
+.heading {
+	@apply mb-7 font-cinzel font-bold leading-normal text-gray-200;
+	font-size: 56px;
+	letter-spacing: 0.02em;
+}
+.description {
+	@apply font-garamond leading-lg mb-10 text-gray-300;
+	font-size: 20px;
+
+	em {
+		@apply italic text-gray-200;
+	}
+}
+.terms {
+	@apply flex gap-8 mb-12;
+}
+.term {
+	@apply flex flex-col gap-1;
+}
+.label {
+	@apply uppercase opacity-60 text-gray-300;
+	font-size: 10px;
+	letter-spacing: 0.25em;
+}
+.value {
+	@apply font-cinzel text-gray-200;
+	font-size: 14px;
+}
+.quote {
+	@apply font-garamond italic py-4 px-6 mb-12 border-l-2 border-l-red-400 text-gray-200;
+	font-size: 18px;
+	background-color: rgba(192, 21, 42, 0.05);
+}
+.button {
+	@apply red-button h-14 px-12;
+}
+.divider {
+	@apply line-divider;
+}
+
+@media (max-width: 1400px) {
+	.wrapper {
+		@apply gap-20;
+	}
+	.info {
+		max-width: 500px;
+	}
+	.heading {
+		font-size: 45px;
+	}
+	.description {
+		@apply mb-8;
+		font-size: 19px;
+	}
+	.terms {
+		@apply mb-10;
+	}
+	.quote {
+		@apply mb-10;
+		font-size: 17px;
+	}
+	.button {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 1000px) {
+	.wrapper {
+		@apply flex-col gap-10 py-24;
+	}
+	.info {
+		@apply max-w-full text-center flex flex-col items-center;
+	}
+}
+
+@media (max-width: 800px) {
+	.wrapper {
+		@apply py-20;
+	}
+	.heading {
+		@apply leading-md mb-3;
+		font-size: 40px;
+	}
+	.description {
+		font-size: 18px;
+	}
+	.quote {
+		@apply leading-md py-3 px-4;
+	}
+	.button {
+		@apply px-10;
+	}
+}
+
+@media (max-width: 600px) {
+	.caption {
+		@apply mb-4;
+	}
+	.heading {
+		@apply mb-2;
+		font-size: 35px;
+	}
+	.description {
+		font-size: 17px;
+	}
+	.quote {
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 400px) {
+	.heading {
+		font-size: 28px;
+	}
+	.button {
+		@apply w-full px-3;
+	}
+}

@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIGN OF PAIN — The Warrior's Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --deep: #0D0B0A;
+    --red: #C0152A;
+    --red-dark: #6B0A14;
+    --red-glow: rgba(192, 21, 42, 0.35);
+    --ash: #E2D9CC;
+    --ash-dim: #9A9087;
+    --smoke: #2A2520;
+    --paper: #14100D;
+    --border: rgba(192, 21, 42, 0.25);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--ash);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95) 0%, transparent 100%);
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    color: var(--ash);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ash-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--red); }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden;
+    padding: 120px 24px 80px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(192,21,42,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 60%, rgba(107,10,20,0.12) 0%, transparent 60%),
+      var(--black);
+    z-index: 0;
+  }
+
+  /* Embers */
+  .embers { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .ember {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--red);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-up linear infinite;
+  }
+  @keyframes float-up {
+    0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    10%  { opacity: 0.8; }
+    80%  { opacity: 0.4; }
+    100% { transform: translateY(-100vh) translateX(var(--drift)) scale(0.3); opacity: 0; }
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
+
+  .hero-overline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0.9;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(52px, 9vw, 110px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    color: var(--ash);
+    margin-bottom: 12px;
+  }
+
+  .hero-title .line-red { color: var(--red); display: block; }
+
+  .hero-sub {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(16px, 2.5vw, 22px);
+    font-style: italic;
+    color: var(--ash-dim);
+    margin: 28px 0 56px;
+    line-height: 1.6;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .btn-primary {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ash);
+    background: var(--red);
+    border: none;
+    padding: 18px 52px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 40px rgba(192,21,42,0.4), 0 0 80px rgba(192,21,42,0.15);
+  }
+  .btn-primary:hover {
+    background: #D91A32;
+    box-shadow: 0 0 60px rgba(192,21,42,0.6), 0 0 120px rgba(192,21,42,0.25);
+  }
+
+  .hero-note {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--ash-dim);
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.4;
+  }
+  .scroll-line span {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ash-dim);
+  }
+  .scroll-bar {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+    animation: pulse-bar 2s ease-in-out infinite;
+  }
+  @keyframes pulse-bar {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  /* ─── SECTION HELPERS ─── */
+  section { position: relative; }
+
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--red), transparent);
+    opacity: 0.3;
+  }
+
+  /* ─── BOOK REVEAL ─── */
+  #book-reveal {
+    padding: 120px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .book-cover-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .book-cover {
+    width: 280px;
+    height: 400px;
+    background: linear-gradient(135deg, #1A0A0D 0%, #2D0D13 40%, #0D0305 100%);
+    border: 1px solid rgba(192,21,42,0.4);
+    position: relative;
+    box-shadow:
+      0 0 80px rgba(192,21,42,0.25),
+      0 40px 80px rgba(0,0,0,0.8),
+      inset 0 0 60px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.4s, box-shadow 0.4s;
+  }
+  .book-cover:hover {
+    transform: translateY(-8px) rotateY(-3deg);
+    box-shadow:
+      0 0 100px rgba(192,21,42,0.35),
+      0 60px 100px rgba(0,0,0,0.9);
+  }
+
+  .book-cover-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+
+  .book-cover-ornament {
+    width: 40px;
+    height: 1px;
+    background: var(--red);
+    margin: 16px auto;
+    opacity: 0.6;
+  }
+
+  .book-cover-title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ash);
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    margin: 8px 0;
+  }
+
+  .book-cover-sub {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ash-dim);
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+
+  .book-cover-bottom {
+    position: absolute;
+    bottom: 24px;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    color: var(--red);
+    opacity: 0.6;
+  }
+
+  .book-glow {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 60px;
+    background: var(--red);
+    filter: blur(50px);
+    opacity: 0.2;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .book-info { }
+
+  .book-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .book-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--red);
+    opacity: 0.3;
+    max-width: 60px;
+  }
+
+  .book-title-large {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--ash);
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+  }
+
+  .book-description {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    line-height: 1.75;
+    color: var(--ash-dim);
+    margin-bottom: 40px;
+  }
+
+  .book-description em { color: var(--ash); font-style: italic; }
+
+  .book-meta {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ash-dim);
+    opacity: 0.6;
+  }
+  .meta-value {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: var(--ash);
+  }
+
+  .book-quote {
+    border-left: 2px solid var(--red);
+    padding: 16px 24px;
+    margin-bottom: 48px;
+    background: rgba(192,21,42,0.05);
+  }
+  .book-quote p {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ash);
+    line-height: 1.6;
+  }
+
+  /* ─── FOR WHO ─── */
+  #for-who {
+    padding: 100px 48px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .for-who-intro {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(20px, 3vw, 32px);
+    color: var(--ash-dim);
+    margin-bottom: 64px;
+    line-height: 1.4;
+  }
+  .for-who-intro span { color: var(--ash); }
+
+  .for-who-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(192,21,42,0.15);
+    border: 1px solid rgba(192,21,42,0.15);
+  }
+
+  .for-who-card {
+    background: var(--deep);
+    padding: 48px 32px;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  .for-who-card:hover { background: rgba(192,21,42,0.06); }
+
+  .for-who-symbol {
+    font-family: 'Cinzel', serif;
+    font-size: 32px;
+    color: var(--red);
+    margin-bottom: 24px;
+    opacity: 0.7;
+  }
+
+  .for-who-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ash);
+    line-height: 1.6;
+  }
+
+  /* ─── SOCIAL PROOF ─── */
+  #community {
+    padding: 100px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .community-label {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--ash-dim);
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    opacity: 0.6;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .social-card {
+    background: var(--deep);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 36px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+  .social-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--platform-color, var(--red));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: center;
+  }
+  .social-card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-4px); }
+  .social-card:hover::before { transform: scaleX(1); }
+
+  .social-icon {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .social-icon svg { width: 28px; height: 28px; }
+
+  .social-count {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ash);
+    margin-bottom: 6px;
+  }
+
+  .social-name {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ash-dim);
+    opacity: 0.5;
+  }
+
+  /* ─── READER SECTION ─── */
+  #reader-section {
+    padding: 100px 0 0;
+    max-width: 100%;
+  }
+
+  .reader-header {
+    text-align: center;
+    padding: 0 48px 60px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .reader-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--ash);
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .reader-header p {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ash-dim);
+  }
+
+  #reader {
+    background: var(--paper);
+    border-top: 1px solid rgba(192,21,42,0.2);
+    min-height: 80vh;
+    display: none;
+  }
+
+  #reader.active { display: block; }
+
+  .reader-toolbar {
+    background: rgba(10,6,4,0.98);
+    border-bottom: 1px solid rgba(192,21,42,0.15);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .reader-book-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--ash-dim);
+    opacity: 0.7;
+  }
+
+  .reader-page-info {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--ash-dim);
+    letter-spacing: 0.15em;
+  }
+
+  .reader-font-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .font-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--ash-dim);
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .font-btn:hover { border-color: var(--red); color: var(--ash); }
+
+  .reader-body {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 72px 24px 120px;
+  }
+
+  .chapter-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: var(--red);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+
+  .chapter-title {
+    font-family: 'Cinzel', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ash);
+    text-align: center;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .chapter-ornament {
+    text-align: center;
+    color: var(--red);
+    font-size: 18px;
+    margin-bottom: 56px;
+    opacity: 0.5;
+    letter-spacing: 0.5em;
+  }
+
+  .reader-text {
+    font-family: 'EB Garamond', serif;
+    font-size: var(--reader-font-size, 19px);
+    line-height: 1.95;
+    color: #D8CFBF;
+    text-indent: 2em;
+  }
+
+  .reader-text p { margin-bottom: 1.6em; }
+
+  .reader-text .no-indent { text-indent: 0; }
+
+  .reader-text .speech {
+    color: var(--ash);
+    font-style: italic;
+  }
+
+  .reader-nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 48px 48px;
+    border-top: 1px solid rgba(192,21,42,0.1);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .reader-nav-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ash-dim);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    text-decoration: none;
+  }
+  .reader-nav-btn:hover { border-color: var(--red); color: var(--ash); background: rgba(192,21,42,0.05); }
+  .reader-nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+
+  /* ─── PROGRESS BAR ─── */
+  .reader-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--red);
+    z-index: 200;
+    transition: width 0.3s;
+    box-shadow: 0 0 10px rgba(192,21,42,0.8);
+  }
+
+  /* ─── EMAIL MODAL ─── */
+  .email-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .email-modal-overlay.active { display: flex; }
+
+  .email-modal {
+    background: var(--deep);
+    border: 1px solid rgba(192,21,42,0.35);
+    max-width: 480px;
+    width: 90%;
+    padding: 56px 48px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 80px rgba(192,21,42,0.15), 0 40px 80px rgba(0,0,0,0.8);
+  }
+
+  .modal-ornament {
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    color: var(--red);
+    margin-bottom: 24px;
+    opacity: 0.6;
+    letter-spacing: 0.5em;
+  }
+
+  .modal-title {
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ash);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .modal-sub {
+    font-family: 'EB Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--ash-dim);
+    line-height: 1.6;
+    margin-bottom: 36px;
+  }
+
+  .modal-input {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--ash);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 14px 20px;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .modal-input:focus { border-color: var(--red); }
+  .modal-input::placeholder { color: var(--ash-dim); opacity: 0.4; }
+
+  .modal-btn {
+    width: 100%;
+    background: var(--red);
+    color: var(--ash);
+    border: none;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 16px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: background 0.2s;
+  }
+  .modal-btn:hover { background: #D91A32; }
+
+  .modal-skip {
+    font-size: 12px;
+    color: var(--ash-dim);
+    opacity: 0.4;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    background: none;
+    border: none;
+    transition: opacity 0.2s;
+  }
+  .modal-skip:hover { opacity: 0.7; }
+
+  /* ─── COMING SECTION ─── */
+  #coming {
+    padding: 120px 48px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #coming h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    color: var(--ash);
+    margin-bottom: 24px;
+    font-weight: 700;
+  }
+
+  #coming p {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--ash-dim);
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  .coming-tease {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid rgba(192,21,42,0.25);
+    padding: 24px 40px;
+    opacity: 0.5;
+  }
+
+  .coming-tease span {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--ash);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 56px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    color: var(--ash-dim);
+  }
+  .footer-logo span { color: var(--red); }
+
+  .footer-tagline {
+    font-family: 'EB Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--ash-dim);
+    opacity: 0.4;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 20px;
+  }
+  .footer-socials a {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ash-dim);
+    text-decoration: none;
+    opacity: 0.4;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .footer-socials a:hover { opacity: 1; color: var(--red); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    #book-reveal {
+      grid-template-columns: 1fr;
+      padding: 80px 24px;
+      gap: 56px;
+      text-align: center;
+    }
+    .book-label { justify-content: center; }
+    .book-meta { justify-content: center; }
+    .for-who-grid { grid-template-columns: 1fr; }
+    .social-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { flex-direction: column; text-align: center; }
+    .reader-toolbar { padding: 14px 20px; }
+    .reader-body { padding: 48px 16px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="reader-progress" id="reader-progress" style="width: 0%"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SIGN <span>OF</span> PAIN</a>
+  <ul class="nav-links">
+    <li><a href="#book-reveal">The Book</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#reader-section" id="nav-read">Begin Reading</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="embers" id="embers"></div>
+
+  <div class="hero-content">
+    <p class="hero-overline">Sign of Pain Library — Volume I</p>
+
+    <h1 class="hero-title">
+      THE WEIGHT
+      <span class="line-red">OF WAR</span>
+    </h1>
+
+    <p class="hero-sub">
+      He survived the battlefield. But the real war was just beginning.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#reader-section" class="btn-primary" id="hero-read-btn" onclick="openReader()">
+        Read Free — No Sign Up
+      </a>
+      <span class="hero-note">No registration · No payment · Your progress is saved</span>
+    </div>
+  </div>
+
+  <div class="scroll-line">
+    <div class="scroll-bar"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BOOK REVEAL -->
+<div id="book-reveal">
+  <div class="book-cover-wrap">
+    <div class="book-cover" onclick="openReader()">
+      <p class="book-cover-brand">Sign of Pain</p>
+      <div class="book-cover-ornament"></div>
+      <h2 class="book-cover-title">THE<br>WEIGHT<br>OF WAR</h2>
+      <div class="book-cover-ornament"></div>
+      <p class="book-cover-sub">A Warrior's Story</p>
+      <p class="book-cover-bottom">SIGN OF PAIN LIBRARY</p>
+    </div>
+    <div class="book-glow"></div>
+  </div>
+
+  <div class="book-info">
+    <div class="book-label">Volume I — War Fiction</div>
+
+    <h2 class="book-title-large">The Weight<br>of War</h2>
+
+    <p class="book-description">
+      Marcus Cole came home. His body did.<br><br>
+      But what he saw in the dust of Fallujah — the faces, the fire, the silence of men who would never speak again — that stayed behind enemy lines in his mind, refusing to surrender.<br><br>
+      <em>This is his story. Told by no one but him.</em>
+    </p>
+
+    <div class="book-meta">
+      <div class="meta-item">
+        <span class="meta-label">Length</span>
+        <span class="meta-value">220 Pages</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Genre</span>
+        <span class="meta-value">War Fiction</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Price</span>
+        <span class="meta-value">Free</span>
+      </div>
+    </div>
+
+    <div class="book-quote">
+      <p>"I wasn't afraid of dying. I was afraid of what came after living."</p>
+    </div>
+
+    <a href="#reader-section" class="btn-primary" onclick="openReader()">Begin Reading →</a>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- FOR WHO -->
+<section id="for-who">
+  <p class="for-who-intro">
+    <span>This isn't for everyone.</span><br>
+    It's for the ones who understand.
+  </p>
+
+  <div class="for-who-grid">
+    <div class="for-who-card">
+      <div class="for-who-symbol">I</div>
+      <p class="for-who-text">For the man who carries weight no one else can see</p>
+    </div>
+    <div class="for-who-card">
+      <div class="for-who-symbol">II</div>
+      <p class="for-who-text">For the one who's been through fire and came back changed</p>
+    </div>
+    <div class="for-who-card">
+      <div class="for-who-symbol">III</div>
+      <p class="for-who-text">For those who find peace only inside the storm</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- COMMUNITY / SOCIAL PROOF -->
+<section id="community">
+  <p class="community-label">The Sign of Pain Community</p>
+
+  <div class="social-grid">
+    <a href="https://tiktok.com/@thesignofpain" target="_blank" class="social-card" style="--platform-color: #E8E0D5;">
+      <div class="social-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="var(--ash-dim)">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+        </svg>
+      </div>
+      <div class="social-count">25K</div>
+      <div class="social-name">TikTok</div>
+    </a>
+
+    <a href="#" target="_blank" class="social-card" style="--platform-color: #C0152A;">
+      <div class="social-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="var(--ash-dim)">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <div class="social-count">8K</div>
+      <div class="social-name">Instagram</div>
+    </a>
+
+    <a href="#" target="_blank" class="social-card" style="--platform-color: #3b5998;">
+      <div class="social-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="var(--ash-dim)">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </div>
+      <div class="social-count">10K</div>
+      <div class="social-name">Facebook</div>
+    </a>
+
+    <a href="#" target="_blank" class="social-card" style="--platform-color: #FFFC00;">
+      <div class="social-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" color="var(--ash-dim)">
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zM9.8 17.6c-.4.2-.7 0-.7-.4V11l5.6 3.3-4.9 3.3z"/>
+        </svg>
+      </div>
+      <div class="social-count">5K</div>
+      <div class="social-name">Snapchat</div>
+    </a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- READER SECTION -->
+<section id="reader-section">
+  <div class="reader-header">
+    <h2>Begin the Story</h2>
+    <p>Your progress is saved automatically. Pick up where you left off.</p>
+  </div>
+
+  <div id="reader">
+    <div class="reader-toolbar">
+      <span class="reader-book-title">THE WEIGHT OF WAR</span>
+      <span class="reader-page-info" id="page-counter">Page 1 of 12</span>
+      <div class="reader-font-controls">
+        <button class="font-btn" id="font-down" title="Decrease font size">A−</button>
+        <button class="font-btn" id="font-up" title="Increase font size">A+</button>
+      </div>
+    </div>
+
+    <div class="reader-body" id="reader-body">
+      <!-- Content injected by JS -->
+    </div>
+
+    <div class="reader-nav-bar">
+      <button class="reader-nav-btn" id="prev-btn" disabled>← Previous</button>
+      <button class="reader-nav-btn" id="next-btn">Next →</button>
+    </div>
+  </div>
+
+  <div id="reader-start" style="text-align:center; padding: 60px 24px 100px;">
+    <a href="#reader-section" class="btn-primary" onclick="openReader(); return false;">Open the Book →</a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- COMING NEXT -->
+<section id="coming">
+  <h2>This is only the beginning.</h2>
+  <p>
+    The Sign of Pain Library is growing. More warriors. More stories.<br>
+    Each one told by the man who lived it.
+  </p>
+
+  <div class="coming-tease">
+    <span>VOLUME II</span>
+    <span style="color: var(--red); opacity: 0.4;">—</span>
+    <span>Coming Soon</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">SIGN <span>OF</span> PAIN</span>
+  <span class="footer-tagline">"All stories are fiction. All pain is real."</span>
+  <div class="footer-socials">
+    <a href="https://tiktok.com/@thesignofpain" target="_blank">TikTok</a>
+    <a href="#" target="_blank">Instagram</a>
+    <a href="#" target="_blank">Facebook</a>
+  </div>
+</footer>
+
+<!-- EMAIL MODAL -->
+<div class="email-modal-overlay" id="email-modal">
+  <div class="email-modal">
+    <div class="modal-ornament">✦</div>
+    <h3 class="modal-title">You're deep in the story.</h3>
+    <p class="modal-sub">
+      Leave your email and we'll tell you when the next warrior speaks.
+    </p>
+    <input
+      type="email"
+      class="modal-input"
+      id="modal-email"
+      placeholder="your@email.com"
+    >
+    <button class="modal-btn" id="modal-submit">Continue Reading</button>
+    <button class="modal-skip" id="modal-skip">No thanks, continue without</button>
+  </div>
+</div>
+
+<script>
+  // ─── EMBER PARTICLES ───
+  const embers = document.getElementById('embers');
+  for (let i = 0; i < 30; i++) {
+    const el = document.createElement('div');
+    el.className = 'ember';
+    const left = Math.random() * 100;
+    const duration = 6 + Math.random() * 12;
+    const delay = Math.random() * 12;
+    const drift = (Math.random() - 0.5) * 120;
+    const size = 1 + Math.random() * 2;
+    el.style.cssText = `
+      left: ${left}%;
+      bottom: ${Math.random() * 40}%;
+      width: ${size}px;
+      height: ${size}px;
+      animation-duration: ${duration}s;
+      animation-delay: ${delay}s;
+      --drift: ${drift}px;
+    `;
+    embers.appendChild(el);
+  }
+
+  // ─── BOOK CONTENT ───
+  const BOOK = [
+    {
+      chapter: 'Prologue',
+      title: 'Before the Fire',
+      pages: 1,
+      content: `
+        <p class="no-indent">I'll tell you something about war no one ever puts in the reports.</p>
+        <p>It doesn't end.</p>
+        <p>Not when the ceasefire comes. Not when the plane touches down on home soil. Not even when your mother cries into your chest and calls you by the name she gave you before all of this. War doesn't end — it just relocates. It moves from the streets into your chest. It takes up residence somewhere behind your sternum, and it stays there, and it never, not once, pays rent.</p>
+        <p>My name is Marcus Cole. Sergeant First Class, retired. Or at least that's what the paperwork says. The truth is you don't retire from what I did. You just stop getting paid for it.</p>
+        <p>This is my story. Not the Army's version. Not the official report. Mine.</p>
+        <p>If it breaks something in you reading this, then you're reading it right.</p>
+      `
+    },
+    {
+      chapter: 'Chapter I',
+      title: 'The Last Morning in Fallujah',
+      pages: 2,
+      content: `
+        <p class="no-indent">November. The air tastes like concrete dust and diesel and something else — something you don't name out loud because once you name it, you can't stop smelling it.</p>
+        <p>Sergeant Danny Reyes is three feet to my left. He's checking his bootlaces for the second time this morning. He always does that before something bad happens. I've learned to read him like weather. Loose laces: Danny's nervous. Tight laces: Danny knows something I don't.</p>
+        <p>Today his laces are double-knotted. Military tuck.</p>
+        <p class="speech">"Hey Cole."</p>
+        <p class="speech">"Yeah."</p>
+        <p class="speech">"You think they have good coffee in heaven?"</p>
+        <p>I didn't answer. Some questions don't deserve an answer. Some questions are just a man's way of saying <em>I'm scared</em> without using those words, because in a place like this, those words don't exist.</p>
+        <p>We moved out at 0500. Fourteen men. Half of us would eat lunch in the same building we started the day in. The other half would become the reason someone else couldn't sleep for the next twenty years.</p>
+        <p>I'm the one telling you this story. You already know which half I was.</p>
+      `
+    },
+    {
+      chapter: 'Chapter I',
+      title: 'The Street of No Name',
+      pages: 3,
+      content: `
+        <p class="no-indent">There's a street in Fallujah that doesn't appear on any map I've ever seen. We called it the Street of No Name. Not because it had no name in Arabic — everything there had a name. We called it that because the men who went down it stopped having names. They became numbers. Report numbers. Casualty numbers. Next-of-kin notification numbers.</p>
+        <p>I walked down that street twenty-three times over six months. I'm not a religious man. But I'm a superstitious one. And every time I put my boot on that first cracked tile, I said the same thing under my breath:</p>
+        <p class="speech">"Not today."</p>
+        <p>I don't know who I was talking to. God, maybe. Or whatever's left of God in a place like that. Or maybe I was just talking to myself — the version of me that was already planning what I'd do if someone started shooting from the third floor on the left. The version that had already died seventeen times in his head so that his body would know what to do if it happened for real.</p>
+        <p>That version of me was very good at his job.</p>
+        <p>That version of me came home.</p>
+        <p>The other Marcus — the one who loved his father's Sunday cooking, the one who wanted to teach history in a small town somewhere in Ohio — I'm still looking for him.</p>
+      `
+    },
+    {
+      chapter: 'Chapter II',
+      title: 'Coming Home',
+      pages: 4,
+      content: `
+        <p class="no-indent">Home is a strange word when you've been away long enough.</p>
+        <p>I stood in the arrivals terminal at Columbus International and I watched people cry. Happy crying. The kind where someone's arms open and another person walks into them and for a moment the whole world collapses to the size of two people who missed each other.</p>
+        <p>My mother was there. She held my face in her hands and looked at me the way you look at something that almost wasn't there. I smiled. I hugged her back. I said <em>I'm fine, Mama. I'm home.</em></p>
+        <p>What I didn't say: <em>I left something over there. I don't know what it was, but I know it was important. And I don't think I'm getting it back.</em></p>
+        <p>The drive home, she talked about the neighbors. About the garden. About how Mrs. Patterson's boy had made varsity football. I listened. I nodded. I watched the familiar streets of Columbus roll past the window and thought: I've walked through alleys where buildings were still smoking. I've stepped over things I don't talk about. And here is a traffic light. Here is a Walgreens. Here is a woman walking a golden retriever.</p>
+        <p>How are these two worlds the same world?</p>
+        <p>The answer is: they're not. Not for men like me. You don't come home. You arrive somewhere that used to be home, and you spend the rest of your life trying to remember what made it feel that way.</p>
+      `
+    },
+    {
+      chapter: 'Chapter II',
+      title: 'Three in the Morning',
+      pages: 5,
+      content: `
+        <p class="no-indent">I stopped sleeping at 3am. Not stopped sleeping — stopped sleeping past 3am. My eyes would open in the dark at exactly 3:00, every night, without fail, like some internal alarm that had been set in Fallujah and never reset.</p>
+        <p>At first I'd lie there. Try to breathe slow. Try the things the VA counselor suggested — grounding exercises, she called them. <em>Name five things you can see. Four things you can touch.</em></p>
+        <p>The ceiling. The window. The closet door. The photograph of my father on the dresser. My father died while I was on second deployment. Heart attack. I found out via email. I read it three times before I understood the words. Then I went and cleaned my rifle because there was nothing else to do.</p>
+        <p>So at 3am I'd see his photograph and I'd think about the last conversation we had, on the phone, seven months before. He'd told me not to be a hero. I'd laughed and said <em>Yes sir</em> like it was a joke.</p>
+        <p>He knew it wasn't a joke.</p>
+        <p>I learned things too late in my life. About my father. About what he needed from me before he left. About the fact that some debts you can't pay after the creditor is gone.</p>
+        <p>That's the weight I'm talking about. Not the rifle. Not the body armor. Not the eighteen months of combat.</p>
+        <p>This. This right here.</p>
+      `
+    },
+    {
+      chapter: 'Chapter III',
+      title: 'The Man I Was Before',
+      pages: 6,
+      content: `
+        <p class="no-indent">I found a photograph last spring. I was cleaning out a storage box — the kind you keep telling yourself you'll sort through and never do — and I found a photograph from my senior year of high school.</p>
+        <p>Seventeen years old. Summer cookout in the backyard. I'm laughing at something my friend Tyler said. Not that careful, controlled smile I wear now — a real laugh. The kind that takes over your whole face before you can stop it.</p>
+        <p>I stared at that photograph for a long time.</p>
+        <p>I didn't recognize him. Not the face — the face I recognized. But whatever was behind the face, whatever was making that boy laugh like the world owed him something good — that I didn't recognize.</p>
+        <p>I thought about what had been done to that boy. Not by the enemy. Not by the war. By <em>me</em>. By the choices I made and the things I chose to see and the decisions I made to keep going when going meant leaving parts of yourself behind like equipment you couldn't carry anymore.</p>
+        <p>I put the photograph on the refrigerator.</p>
+        <p>I don't know why. Maybe as a reminder. Maybe as a challenge. Maybe because that boy deserved to be in a room with the man who replaced him, just so someone could witness what had been lost.</p>
+      `
+    },
+    {
+      chapter: 'Chapter IV',
+      title: 'What Courage Actually Costs',
+      pages: 7,
+      content: `
+        <p class="no-indent">They give you medals for courage. I have three. They're in a drawer somewhere, under some old tax documents and a manual for a watch I don't own anymore.</p>
+        <p>Nobody tells you what courage actually costs.</p>
+        <p>Courage costs sleep. It costs the ability to sit in a restaurant with your back to the door. It costs your wife, sometimes. It cost me mine — not all at once, not dramatically, not like a fight in a movie. Slowly. The way rust works. One morning she was there, and then gradually she wasn't, and then one Tuesday she packed two suitcases and said she still loved me but she didn't know how to reach me anymore.</p>
+        <p class="speech">"It's like trying to hold someone who's already somewhere else,"</p>
+        <p>she said.</p>
+        <p>She wasn't wrong. I was somewhere else. I was always somewhere else. You learn to be somewhere else when somewhere else is safer than where you are, and the habit doesn't break just because the geography changes.</p>
+        <p>I signed the divorce papers on a Thursday. Drank one glass of whiskey. Didn't cry. Told myself that was strength.</p>
+        <p>It wasn't strength. It was the same thing I'd been doing for eleven years: protecting myself from feeling by refusing to feel. And you can do that — you can actually do that — right up until the moment you can't, and then all of it comes at once, and brother, let me tell you, it comes hard.</p>
+      `
+    },
+    {
+      chapter: 'Chapter V',
+      title: 'The First Time I Talked',
+      pages: 8,
+      content: `
+        <p class="no-indent">There's a park near my apartment. I go there in the evenings when the 3am eyes start happening earlier than they should. An old man named Eugene walks his dog there — a grey-muzzled beagle named Chester who moves slow and smells everything like the world is endlessly fascinating.</p>
+        <p>Eugene was in Korea. He never brings it up. I never brought up mine. We'd sit on the same bench and watch the light change and sometimes we didn't talk at all, which was fine because silence between men who have seen things is different from regular silence. It has texture. Weight. Respect.</p>
+        <p>One evening in October he said, without looking at me:</p>
+        <p class="speech">"You keeping your head above water, son?"</p>
+        <p>I don't know why that specific question broke the levee. Maybe because he asked <em>above water</em> and not <em>alright</em>. Because <em>alright</em> is a social nicety that demands <em>yes fine thanks you?</em> But <em>above water</em> — that admits there's water. That admits you might not be.</p>
+        <p class="speech">"Some days,"</p>
+        <p>I said.</p>
+        <p>He nodded. Chester put his head on my knee. I put my hand on that old dog's head and I talked for forty minutes and Eugene didn't say a word. He just listened. He just <em>was there.</em></p>
+        <p>Sometimes that's all a man needs. One person who doesn't flinch. One person who stays while you say the words out loud.</p>
+      `
+    },
+    {
+      chapter: 'Chapter VI',
+      title: 'The Weight Doesn't Leave',
+      pages: 9,
+      content: `
+        <p class="no-indent">I want to tell you something important, and I want to say it plainly so it doesn't get lost:</p>
+        <p>The weight doesn't leave.</p>
+        <p>I'm not writing this to tell you there's a moment of grace, a revelation, a morning you wake up healed. That would be a lie, and I don't lie to men I respect.</p>
+        <p>The weight stays. But you can get stronger. Not stronger than the weight — I don't believe in that version of the story. But stronger in how you carry it. More practiced. More aware of when it's shifting, when it's about to drop you. You learn the terrain of your own damage, and knowing the terrain is half the battle.</p>
+        <p>Danny Reyes — he made it home. He farms in Nebraska now. Soybeans. He sends me photographs sometimes: horizon flat as a rifle range, sky enormous, him squinting against the sun with something that might be peace on his face. His laces are always loose in the photographs. I take that as a good sign.</p>
+        <p>I went and visited him in April. We didn't talk about Fallujah. We drank bad coffee on his porch and watched nothing happen across three hundred acres of flat midwestern land and it was one of the better days I've had in years.</p>
+        <p>Good coffee is for men with no history. Bad coffee on a porch with someone who understands — that's the real thing.</p>
+      `
+    },
+    {
+      chapter: 'Chapter VII',
+      title: 'For the Men Still in the Water',
+      pages: 10,
+      content: `
+        <p class="no-indent">I write this for you.</p>
+        <p>Not the men who've come out the other side — they don't need it. I write for the ones who are still in the middle of it. The ones waking up at 3am. The ones who can't sit with their backs to the door. The ones whose wives or brothers or friends are slowly learning that they can't reach them, no matter how hard they try.</p>
+        <p>I write for the man who is holding it together so completely, so professionally, that no one around him knows he's been falling apart for three years.</p>
+        <p>I write for him because I was him.</p>
+        <p>And here is what I want to tell him: it is not weakness to break. It is not failure to be damaged by things that should damage a man. No one walks through fire unchanged. The question isn't whether you're changed. The question is what you do with the changed version of yourself.</p>
+        <p>You are not less than who you were. You are the accumulation of who you were and everything that has happened to you and everything you have survived. That is not small. That is not something to be ashamed of.</p>
+        <p>That is the whole story.</p>
+        <p>That is what a warrior actually is — not someone who isn't afraid. Not someone who doesn't break. Someone who carries the broken pieces forward anyway, because the mission isn't over until it's over, and the mission of a man's life is never over until he draws his last breath.</p>
+        <p>So carry on. That's all I have for you.</p>
+        <p class="speech">Carry on.</p>
+      `
+    },
+    {
+      chapter: 'Epilogue',
+      title: 'A Morning in March',
+      pages: 11,
+      content: `
+        <p class="no-indent">It's a Tuesday in March. I woke up at 5:30, not 3:00. I'm counting that.</p>
+        <p>Made coffee. Sat on the fire escape with a blanket. The city was still half-asleep — just the early delivery trucks and a few pigeons and the particular grey light that happens before sunrise decides what kind of day it's going to be.</p>
+        <p>I thought about my father. I do that most mornings. Not the grief version anymore — the memory version. The way he'd whistle while he cooked. The specific sound of his boots on the kitchen floor on Sunday morning. Small things. But the small things are what's real. The small things are what we're actually made of.</p>
+        <p>I looked out at the city and thought: I am here. I am still here.</p>
+        <p>Some days that's victory enough. Some days being here, being present, being the man who made it back and who is still — against considerable odds, internal and external — standing upright in the morning light: that's the whole fight right there.</p>
+        <p>I finished my coffee. Went back inside. Washed the cup. Looked at my father's photograph on the refrigerator.</p>
+        <p class="speech">"I'm still here, Pop."</p>
+        <p>That's enough. For today, that's enough.</p>
+      `
+    },
+    {
+      chapter: 'Author's Note',
+      title: 'From the Sign of Pain Library',
+      pages: 12,
+      content: `
+        <p class="no-indent" style="text-align: center; font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.2em; color: var(--red); margin-bottom: 48px;">SIGN OF PAIN LIBRARY</p>
+        <p>The Weight of War is a work of fiction. Marcus Cole does not exist — but the men he represents do. The pain in these pages is not invented. It is drawn from real experiences, real losses, and the very real weight that some men carry in silence for decades.</p>
+        <p>This is Volume I. More warriors will speak. More stories will be told.</p>
+        <p>We created this Library because we believe these stories deserve to be told with care. With craft. With the weight they actually carry — not reduced to statistics or clinical language or motivational quotes, but honored as the full, complicated, human experiences they are.</p>
+        <p>If something in this story hit close to home, that was the intention. You were meant to feel it.</p>
+        <p>Follow the journey: <em>@thesignofpain</em></p>
+        <p style="text-align: center; font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.4em; color: var(--ash-dim); margin-top: 80px; opacity: 0.5;">— SIGN OF PAIN —</p>
+        <p style="text-align: center; font-family: 'EB Garamond', serif; font-style: italic; color: var(--ash-dim); font-size: 15px; opacity: 0.4; margin-top: 12px;">"All stories are fiction. All pain is real."</p>
+      `
+    }
+  ];
+
+  // ─── READER STATE ───
+  let currentPage = parseInt(localStorage.getItem('sop_book1_page') || '0');
+  let fontSize = parseInt(localStorage.getItem('sop_book1_fs') || '19');
+  let emailShown = localStorage.getItem('sop_book1_email_shown') === 'true';
+  let readerOpen = false;
+
+  function openReader() {
+    const reader = document.getElementById('reader');
+    const start = document.getElementById('reader-start');
+    reader.classList.add('active');
+    start.style.display = 'none';
+    readerOpen = true;
+    renderPage(currentPage);
+    document.getElementById('reader-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    updateProgress();
+  }
+
+  function renderPage(idx) {
+    if (idx < 0 || idx >= BOOK.length) return;
+    currentPage = idx;
+    localStorage.setItem('sop_book1_page', idx);
+
+    const page = BOOK[idx];
+    const body = document.getElementById('reader-body');
+    body.innerHTML = `
+      <div class="chapter-heading">${page.chapter}</div>
+      <div class="chapter-title">${page.title}</div>
+      <div class="chapter-ornament">— ✦ —</div>
+      <div class="reader-text">${page.content}</div>
+    `;
+
+    document.getElementById('page-counter').textContent = `Page ${idx + 1} of ${BOOK.length}`;
+    document.getElementById('prev-btn').disabled = idx === 0;
+    document.getElementById('next-btn').disabled = idx === BOOK.length - 1;
+    document.getElementById('reader-body').style.setProperty('--reader-font-size', fontSize + 'px');
+    document.getElementById('reader-body').style.fontSize = fontSize + 'px';
+
+    updateProgress();
+    window.scrollTo({ top: document.getElementById('reader-section').offsetTop, behavior: 'smooth' });
+
+    // Email gate at page 4 (simulates ~20 pages)
+    if (idx >= 3 && !emailShown) {
+      setTimeout(() => showEmailModal(), 800);
+    }
+  }
+
+  function updateProgress() {
+    const pct = ((currentPage + 1) / BOOK.length) * 100;
+    document.getElementById('reader-progress').style.width = pct + '%';
+  }
+
+  document.getElementById('prev-btn').addEventListener('click', () => renderPage(currentPage - 1));
+  document.getElementById('next-btn').addEventListener('click', () => renderPage(currentPage + 1));
+
+  document.getElementById('font-up').addEventListener('click', () => {
+    if (fontSize < 26) { fontSize += 1; localStorage.setItem('sop_book1_fs', fontSize); renderPage(currentPage); }
+  });
+  document.getElementById('font-down').addEventListener('click', () => {
+    if (fontSize > 14) { fontSize -= 1; localStorage.setItem('sop_book1_fs', fontSize); renderPage(currentPage); }
+  });
+
+  function showEmailModal() {
+    if (localStorage.getItem('sop_book1_email_given') === 'true') return;
+    document.getElementById('email-modal').classList.add('active');
+  }
+
+  function closeEmailModal() {
+    document.getElementById('email-modal').classList.remove('active');
+    localStorage.setItem('sop_book1_email_shown', 'true');
+    emailShown = true;
+  }
+
+  document.getElementById('modal-skip').addEventListener('click', closeEmailModal);
+  document.getElementById('modal-submit').addEventListener('click', () => {
+    const email = document.getElementById('modal-email').value.trim();
+    if (email && email.includes('@')) {
+      localStorage.setItem('sop_book1_email_given', 'true');
+      localStorage.setItem('sop_book1_email_value', email);
+      closeEmailModal();
+    }
+  });
+
+  // Auto-restore progress
+  if (currentPage > 0) {
+    // Show restore toast or auto-open
+    const restoreBar = document.createElement('div');
+    restoreBar.style.cssText = `
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+      background: var(--deep); border: 1px solid rgba(192,21,42,0.4);
+      color: var(--ash); font-family: 'DM Sans', sans-serif; font-size: 13px;
+      padding: 14px 24px; z-index: 400; display: flex; gap: 20px; align-items: center;
+      letter-spacing: 0.05em;
+    `;
+    restoreBar.innerHTML = `
+      <span>Continue from page ${currentPage + 1}?</span>
+      <button onclick="openReader(); this.parentElement.remove();" style="background: var(--red); color: var(--ash); border: none; padding: 8px 16px; cursor: pointer; font-family: 'Cinzel', sans-serif; font-size: 11px; letter-spacing: 0.2em;">YES</button>
+      <button onclick="this.parentElement.remove();" style="background: none; color: var(--ash-dim); border: none; cursor: pointer; opacity: 0.5; font-size: 12px;">✕</button>
+    `;
+    document.body.appendChild(restoreBar);
+    setTimeout(() => { if (restoreBar.parentElement) restoreBar.remove(); }, 8000);
+  }
+</script>
+</body>
+</html>

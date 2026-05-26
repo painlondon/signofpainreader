@@ -1,0 +1,47 @@
+.navigation {
+	@apply py-7 grid items-center justify-between gap-10;
+	grid-template-columns: 1fr auto 1fr;
+}
+.title {
+	@apply font-cinzel font-bold overflow-hidden text-ellipsis whitespace-nowrap;
+	letter-spacing: 0.18em;
+}
+.controls {
+	@apply flex items-center justify-end gap-1;
+}
+.control {
+	@apply px-2 cursor-pointer flex items-center justify-center transition-colors;
+
+	> svg {
+		@apply w-6 h-6;
+	}
+
+	&:hover,
+	&.active {
+		@apply text-red-400;
+	}
+}
+
+@media (max-width: 1000px) {
+	.title {
+		@apply hidden;
+	}
+	.navigation {
+		@apply flex;
+	}
+}
+
+@media (max-width: 600px) {
+	.navigation {
+		@apply justify-end;
+	}
+	.logo {
+		@apply hidden;
+	}
+}
+
+@media (max-width: 400px) {
+	.navigation {
+		@apply py-6;
+	}
+}

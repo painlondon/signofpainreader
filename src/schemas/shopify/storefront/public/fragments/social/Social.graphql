@@ -1,0 +1,17 @@
+fragment Social on Metaobject {
+	heading: field(key: "heading") {
+		value
+	}
+	icon: field(key: "icon") {
+		value
+	}
+	subscribers: field(key: "subscribers") {
+		value
+	}
+	link: field(key: "link") {
+		value
+	}
+	theme: field(key: "theme") {
+		value
+	}
+}

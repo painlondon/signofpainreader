@@ -1,0 +1,14 @@
+query Menu {
+	header: menu(handle: "main-menu") {
+		items {
+			title
+			url
+		}
+	}
+	footer: menu(handle: "footer") {
+		items {
+			title
+			url
+		}
+	}
+}

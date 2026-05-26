@@ -1,0 +1,69 @@
+.header {
+	@apply w-full fixed top-0 left-0 right-0 z-1;
+}
+.wrapper {
+	@apply py-7 flex items-center justify-between gap-10;
+	background: linear-gradient(
+		to bottom,
+		rgba(8, 8, 8, 0.95) 0%,
+		transparent 100%
+	);
+}
+.logo {
+	@apply text-gray-200;
+	font-size: 13px;
+}
+.list {
+	@apply flex gap-9;
+}
+.link {
+	@apply uppercase text-gray-300 transition-colors;
+	font-size: 12px;
+	letter-spacing: 0.2em;
+}
+.link:hover {
+	@apply text-red-400;
+}
+.trigger,
+.head {
+	@apply hidden;
+}
+
+@media (max-width: 800px) {
+	.trigger {
+		@apply block justify-self-start;
+
+		> svg {
+			@apply w-5 h-5;
+		}
+	}
+	.head {
+		@apply flex items-center justify-between;
+		height: 75px;
+	}
+	.close > svg {
+		@apply w-7 h-7;
+	}
+	.menu {
+		@apply px-8 fixed top-0 bottom-0 left-0 right-0 z-2 -translate-x-full bg-black;
+
+		&.opened {
+			@apply animate-slideFromLeft;
+		}
+	}
+	.list {
+		@apply flex-col items-start gap-4;
+	}
+}
+
+@media (max-width: 400px) {
+	.wrapper {
+		@apply py-6;
+	}
+	.head {
+		height: 65px;
+	}
+	.menu {
+		@apply px-6;
+	}
+}

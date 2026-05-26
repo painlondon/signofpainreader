@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SIGN OF PAIN</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Serif:ital,wght@0,300;0,400;1,300;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap"
+		rel="stylesheet">
+	<style>
+		*,
+		*::before,
+		*::after {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box
+		}
+
+		:root {
+			--bg: #060606;
+			--red: #CC0022;
+			--red-dim: #800015;
+			--ash: #F0E8DC;
+			--dim: #666058;
+			--mid: #2A2520;
+			--border: 1px solid rgba(240, 232, 220, 0.06)
+		}
+
+		html {
+			scroll-behavior: smooth
+		}
+
+		body {
+			background: var(--bg);
+			color: var(--ash);
+			font-family: 'IBM Plex Serif', serif;
+			overflow-x: hidden
+		}
+
+		nav {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 100;
+			padding: 0 48px;
+			height: 56px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			background: var(--bg);
+			border-bottom: 1px solid rgba(204, 0, 34, 0.15)
+		}
+
+		.logo {
+			font-family: 'Anton', sans-serif;
+			font-size: 17px;
+			letter-spacing: 0.12em;
+			color: var(--ash);
+			text-decoration: none
+		}
+
+		.logo span {
+			color: var(--red)
+		}
+
+		.nav-right {
+			display: flex;
+			align-items: center;
+			gap: 0
+		}
+
+		.nav-right a {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 10px;
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+			color: var(--dim);
+			text-decoration: none;
+			padding: 0 20px;
+			height: 56px;
+			display: flex;
+			align-items: center;
+			border-left: 1px solid rgba(240, 232, 220, 0.06);
+			transition: color 0.2s, background 0.2s
+		}
+
+		.nav-right a:last-child {
+			border-right: 1px solid rgba(240, 232, 220, 0.06)
+		}
+
+		.nav-right a:hover {
+			color: var(--ash);
+			background: rgba(204, 0, 34, 0.08)
+		}
+
+		/* ─── HERO: NEWSPAPER GRID ─── */
+		#hero {
+			min-height: 100vh;
+			display: grid;
+			grid-template-columns: 1fr 2px 1fr 2px 1fr;
+			grid-template-rows: auto auto;
+			padding-top: 56px;
+			border-bottom: 1px solid rgba(240, 232, 220, 0.06)
+		}
+
+		.col-divider {
+			background: rgba(240, 232, 220, 0.06);
+			grid-row: 1/3
+		}
+
+		.h-col1 {
+			padding: 64px 40px;
+			border-right: none;
+			grid-column: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end
+		}
+
+		.h-col2 {
+			padding: 64px 40px;
+			grid-column: 3;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end
+		}
+
+		.h-col3 {
+			padding: 64px 40px;
+			grid-column: 5;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: flex-start
+		}
+
+		.h-issue {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 9px;
+			letter-spacing: 0.5em;
+			color: var(--red);
+			text-transform: uppercase;
+			margin-bottom: 24px;
+			display: flex;
+			align-items: center;
+			gap: 8px
+		}
+
+		.h-issue::before {
+			content: '';
+			width: 16px;
+			height: 1px;
+			background: var(--red)
+		}
+
+		.h-mega {
+			font-family: 'Anton', sans-serif;
+			font-size: clamp(72px, 11vw, 140px);
+			line-height: 0.88;
+			letter-spacing: 0.01em;
+			color: var(--ash)
+		}
+
+		.h-mega-red {
+			color: var(--red)
+		}
+
+		.h-deck {
+			font-size: 16px;
+			font-style: italic;
+			color: var(--dim);
+			line-height: 1.7;
+			margin-top: 28px;
+			max-width: 320px
+		}
+
+		.ticker {
+			border-top: 1px solid rgba(204, 0, 34, 0.3);
+			border-bottom: 1px solid rgba(204, 0, 34, 0.3);
+			padding: 10px 0;
+			margin: 28px 0;
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			overflow: hidden
+		}
+
+		.ticker-label {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 9px;
+			letter-spacing: 0.4em;
+			color: var(--red);
+			background: rgba(204, 0, 34, 0.12);
+			padding: 4px 10px;
+			white-space: nowrap;
+			flex-shrink: 0
+		}
+
+		.ticker-text {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 10px;
+			letter-spacing: 0.15em;
+			color: var(--dim);
+			white-space: nowrap;
+			animation: scroll-ticker 18s linear infinite
+		}
+
+		@keyframes scroll-ticker {
+			from {
+				transform: translateX(0)
+			}
+
+			to {
+				transform: translateX(-50%)
+			}
+		}
+
+		.book-block {
+			width: 100%;
+			background: linear-gradient(150deg, #1A0407, #2C080F, #0C0204);
+			border: 1px solid rgba(204, 0, 34, 0.25);
+			aspect-ratio: 3/4;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: 28px 20px;
+			text-align: center;
+			cursor: pointer;
+			transition: border-color 0.3s, transform 0.3s;
+			max-height: 340px
+		}
+
+		.book-block:hover {
+			border-color: rgba(204, 0, 34, 0.5);
+			transform: scale(1.02)
+		}
+
+		.bb-micro {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 8px;
+			letter-spacing: 0.6em;
+			color: var(--red);
+			margin-bottom: 16px
+		}
+
+		.bb-title {
+			font-family: 'Anton', sans-serif;
+			font-size: 26px;
+			line-height: 1;
+			color: var(--ash);
+			letter-spacing: 0.04em
+		}
+
+		.bb-title span {
+			color: var(--red);
+			display: block
+		}
+
+		.bb-rule {
+			width: 28px;
+			height: 1px;
+			background: var(--red);
+			margin: 14px auto;
+			opacity: 0.5
+		}
+
+		.bb-sub {
+			font-size: 11px;
+			font-style: italic;
+			color: var(--dim)
+		}
+
+		.h-stats {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1px;
+			background: rgba(240, 232, 220, 0.06);
+			margin-bottom: 28px;
+			width: 100%
+		}
+
+		.hs {
+			background: var(--bg);
+			padding: 16px
+		}
+
+		.hs-l {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 8px;
+			letter-spacing: 0.3em;
+			text-transform: uppercase;
+			color: var(--dim);
+			margin-bottom: 4px
+		}
+
+		.hs-v {
+			font-family: 'Anton', sans-serif;
+			font-size: 22px;
+			color: var(--ash)
+		}
+
+		.hs-v.red {
+			color: var(--red)
+		}
+
+		.btn-block {
+			font-family: 'Anton', sans-serif;
+			font-size: 13px;
+			letter-spacing: 0.25em;
+			color: var(--bg);
+			background: var(--red);
+			border: none;
+			padding: 16px 32px;
+			cursor: pointer;
+			text-decoration: none;
+			display: inline-block;
+			width: 100%;
+			text-align: center;
+			transition: background 0.2s
+		}
+
+		.btn-block:hover {
+			background: #E60026
+		}
+
+		/* ─── MANIFESTO BAR ─── */
+		.mbar {
+			background: var(--red);
+			padding: 20px 48px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 40px
+		}
+
+		.mbar-text {
+			font-family: 'IBM Plex Serif', serif;
+			font-size: 16px;
+			font-style: italic;
+			color: rgba(240, 232, 220, 0.9);
+			letter-spacing: 0.05em;
+			text-align: center
+		}
+
+		.mbar-sep {
+			color: rgba(240, 232, 220, 0.3);
+			font-size: 20px
+		}
+
+		/* ─── BODY ─── */
+		main {
+			max-width: 1100px;
+			margin: 0 auto
+		}
+
+		/* ─── WHO ─── */
+		#who {
+			display: grid;
+			grid-template-columns: 280px 1fr;
+			border-bottom: var(--border)
+		}
+
+		.who-label-col {
+			padding: 56px 40px;
+			border-right: var(--border);
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start
+		}
+
+		.section-label {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 9px;
+			letter-spacing: 0.5em;
+			color: var(--red);
+			text-transform: uppercase;
+			writing-mode: vertical-rl;
+			transform: rotate(180deg);
+			height: fit-content
+		}
+
+		.who-items {
+			padding: 56px 40px;
+			display: flex;
+			flex-direction: column;
+			gap: 0
+		}
+
+		.wi {
+			padding: 28px 0;
+			border-bottom: var(--border);
+			display: grid;
+			grid-template-columns: 40px 1fr;
+			gap: 20px;
+			align-items: start
+		}
+
+		.wi:last-child {
+			border-bottom: none
+		}
+
+		.wi-n {
+			font-family: 'Anton', sans-serif;
+			font-size: 32px;
+			color: rgba(204, 0, 34, 0.2);
+			line-height: 1
+		}
+
+		.wi-t {
+			font-size: 18px;
+			font-style: italic;
+			color: var(--ash);
+			line-height: 1.5;
+			padding-top: 4px
+		}
+
+		/* ─── COMMUNITY ─── */
+		#community {
+			padding: 0;
+			border-bottom: var(--border)
+		}
+
+		.comm-top {
+			padding: 32px 40px;
+			border-bottom: var(--border);
+			display: flex;
+			align-items: center;
+			justify-content: space-between
+		}
+
+		.comm-top h3 {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 10px;
+			letter-spacing: 0.4em;
+			color: var(--dim);
+			text-transform: uppercase
+		}
+
+		.comm-grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr)
+		}
+
+		.sg {
+			padding: 40px 32px;
+			border-right: var(--border);
+			text-decoration: none;
+			transition: background 0.2s;
+			display: flex;
+			flex-direction: column;
+			gap: 6px
+		}
+
+		.sg:last-child {
+			border-right: none
+		}
+
+		.sg:hover {
+			background: rgba(204, 0, 34, 0.05)
+		}
+
+		.sg-n {
+			font-family: 'Anton', sans-serif;
+			font-size: 52px;
+			line-height: 1;
+			color: var(--ash)
+		}
+
+		.sg-p {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 9px;
+			letter-spacing: 0.35em;
+			color: var(--red);
+			text-transform: uppercase
+		}
+
+		.sg-f {
+			font-size: 12px;
+			font-style: italic;
+			color: var(--dim);
+			margin-top: 2px
+		}
+
+		/* ─── NEXT ─── */
+		#next {
+			padding: 0;
+			border-bottom: var(--border);
+			display: grid;
+			grid-template-columns: 1fr 1fr
+		}
+
+		.next-l {
+			padding: 64px 40px;
+			border-right: var(--border);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			gap: 32px
+		}
+
+		.next-l h2 {
+			font-family: 'Anton', sans-serif;
+			font-size: clamp(32px, 5vw, 64px);
+			line-height: 0.95;
+			color: var(--ash)
+		}
+
+		.next-l h2 span {
+			color: var(--red)
+		}
+
+		.next-l p {
+			font-size: 17px;
+			font-style: italic;
+			color: var(--dim);
+			line-height: 1.7
+		}
+
+		.vol2-box {
+			border: 1px solid rgba(204, 0, 34, 0.2);
+			padding: 24px 28px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between
+		}
+
+		.v2-label {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 10px;
+			letter-spacing: 0.3em;
+			color: var(--dim)
+		}
+
+		.v2-num {
+			font-family: 'Anton', sans-serif;
+			font-size: 48px;
+			color: rgba(204, 0, 34, 0.15);
+			line-height: 1
+		}
+
+		.next-r {
+			padding: 64px 40px;
+			display: flex;
+			flex-direction: column;
+			gap: 16px
+		}
+
+		.next-r h3 {
+			font-family: 'Anton', sans-serif;
+			font-size: 13px;
+			letter-spacing: 0.25em;
+			color: var(--ash);
+			margin-bottom: 8px
+		}
+
+		.next-r p {
+			font-size: 15px;
+			font-style: italic;
+			color: var(--dim);
+			line-height: 1.6;
+			margin-bottom: 20px
+		}
+
+		.email-input {
+			background: transparent;
+			border: 1px solid rgba(240, 232, 220, 0.1);
+			color: var(--ash);
+			font-family: 'IBM Plex Serif', serif;
+			font-size: 14px;
+			padding: 12px 16px;
+			outline: none;
+			width: 100%;
+			transition: border-color 0.2s
+		}
+
+		.email-input:focus {
+			border-color: rgba(204, 0, 34, 0.4)
+		}
+
+		.email-input::placeholder {
+			color: var(--dim);
+			opacity: 0.5
+		}
+
+		.btn-submit {
+			width: 100%;
+			background: transparent;
+			border: 1px solid rgba(204, 0, 34, 0.4);
+			color: var(--ash);
+			font-family: 'Anton', sans-serif;
+			font-size: 12px;
+			letter-spacing: 0.3em;
+			padding: 14px;
+			cursor: pointer;
+			transition: background 0.2s, border-color 0.2s
+		}
+
+		.btn-submit:hover {
+			background: rgba(204, 0, 34, 0.12);
+			border-color: rgba(204, 0, 34, 0.7)
+		}
+
+		/* ─── FOOTER ─── */
+		footer {
+			padding: 32px 40px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			gap: 20px;
+			border-top: 2px solid rgba(204, 0, 34, 0.3)
+		}
+
+		.f-logo {
+			font-family: 'Anton', sans-serif;
+			font-size: 16px;
+			letter-spacing: 0.12em;
+			color: var(--ash)
+		}
+
+		.f-logo span {
+			color: var(--red)
+		}
+
+		.f-line {
+			font-size: 12px;
+			font-style: italic;
+			color: var(--dim);
+			opacity: 0.5
+		}
+
+		.f-socials {
+			display: flex;
+			gap: 0
+		}
+
+		.f-socials a {
+			font-family: 'IBM Plex Mono', monospace;
+			font-size: 9px;
+			letter-spacing: 0.2em;
+			text-transform: uppercase;
+			color: var(--dim);
+			text-decoration: none;
+			padding: 8px 16px;
+			border-left: var(--border);
+			transition: color 0.2s
+		}
+
+		.f-socials a:last-child {
+			border-right: var(--border)
+		}
+
+		.f-socials a:hover {
+			color: var(--red)
+		}
+
+		@media(max-width:768px) {
+			nav {
+				padding: 0 20px
+			}
+
+			.nav-right a {
+				padding: 0 12px
+			}
+
+			#hero {
+				grid-template-columns: 1fr;
+				grid-template-rows: auto
+			}
+
+			.col-divider {
+				display: none
+			}
+
+			.h-col1,
+			.h-col2,
+			.h-col3 {
+				grid-column: 1;
+				padding: 40px 24px
+			}
+
+			.h-col2 {
+				border-top: var(--border)
+			}
+
+			.mbar {
+				padding: 16px 24px;
+				flex-direction: column;
+				gap: 8px
+			}
+
+			#who {
+				grid-template-columns: 1fr
+			}
+
+			.who-label-col {
+				display: none
+			}
+
+			.who-items {
+				padding: 40px 24px
+			}
+
+			.comm-grid {
+				grid-template-columns: repeat(2, 1fr)
+			}
+
+			.sg {
+				border-bottom: var(--border)
+			}
+
+			#next {
+				grid-template-columns: 1fr
+			}
+
+			.next-l {
+				border-right: none;
+				border-bottom: var(--border)
+			}
+
+			.next-l,
+			.next-r {
+				padding: 40px 24px
+			}
+
+			footer {
+				padding: 28px 20px;
+				flex-direction: column;
+				text-align: center
+			}
+
+			.f-socials {
+				justify-content: center
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<nav>
+		<a href="#" class="logo">SIGN <span>OF</span> PAIN</a>
+		<div class="nav-right">
+			<a href="#who">The Book</a>
+			<a href="#community">Community</a>
+			<a href="#" onclick="alert('Open in full HTML file')">Read Free</a>
+		</div>
+	</nav>
+
+	<section id="hero">
+		<div class="col-divider"></div>
+		<div class="col-divider" style="grid-column:4"></div>
+
+		<div class="h-col1">
+			<div class="h-issue">Sign of Pain Library Vol. I</div>
+			<div class="h-mega">THE<br>WEIGHT<br><span class="h-mega-red">OF WAR</span></div>
+			<p class="h-deck">
+				He survived the battlefield.<br>The real war was just beginning.
+			</p>
+			<div class="ticker">
+				<span class="ticker-label">✦ NEW</span>
+				<span class="ticker-text">FREE TO READ &nbsp;&nbsp;&nbsp; NO SIGN UP REQUIRED &nbsp;&nbsp;&nbsp; 220 PAGES
+					&nbsp;&nbsp;&nbsp; WAR FICTION &nbsp;&nbsp;&nbsp; SAVE YOUR PROGRESS &nbsp;&nbsp;&nbsp; FREE TO READ
+					&nbsp;&nbsp;&nbsp; NO SIGN UP REQUIRED &nbsp;&nbsp;&nbsp; 220 PAGES &nbsp;&nbsp;&nbsp; WAR FICTION
+					&nbsp;&nbsp;&nbsp; SAVE YOUR PROGRESS</span>
+			</div>
+		</div>
+
+		<div class="h-col2">
+			<div class="book-block" onclick="alert('Open in full HTML file')">
+				<div class="bb-micro">Sign of Pain</div>
+				<div class="bb-rule"></div>
+				<div class="bb-title">THE WEIGHT <span>OF WAR</span></div>
+				<div class="bb-rule"></div>
+				<div class="bb-sub">A Warrior's Story — Marcus Cole</div>
+			</div>
+		</div>
+
+		<div class="h-col3">
+			<div class="h-stats">
+				<div class="hs">
+					<div class="hs-l">Pages</div>
+					<div class="hs-v">220</div>
+				</div>
+				<div class="hs">
+					<div class="hs-l">Genre</div>
+					<div class="hs-v" style="font-size:14px;padding-top:4px;font-family:'IBM Plex Serif',serif;font-style:italic">
+						War Fiction</div>
+				</div>
+				<div class="hs">
+					<div class="hs-l">Price</div>
+					<div class="hs-v red">Free</div>
+				</div>
+				<div class="hs">
+					<div class="hs-l">Progress</div>
+					<div class="hs-v" style="font-size:14px;padding-top:4px;font-family:'IBM Plex Serif',serif;font-style:italic">
+						Saved</div>
+				</div>
+			</div>
+			<a href="#" class="btn-block" onclick="alert('Open in full HTML file')">Begin Reading →</a>
+			<p
+				style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:var(--dim);text-align:center;margin-top:12px">
+				NO REGISTRATION · NO PAYMENT</p>
+		</div>
+	</section>
+
+	<div class="mbar">
+		<span class="mbar-text">"I wasn't afraid of dying."</span>
+		<span class="mbar-sep">—</span>
+		<span class="mbar-text">"I was afraid of what came after living."</span>
+		<span class="mbar-sep">—</span>
+		<span class="mbar-text">Marcus Cole, Sergeant First Class</span>
+	</div>
+
+	<main>
+		<section id="who">
+			<div class="who-label-col">
+				<span class="section-label">Who This Is For</span>
+			</div>
+			<div class="who-items">
+				<div class="wi">
+					<div class="wi-n">01</div>
+					<div class="wi-t">For the man who carries weight no one else can see</div>
+				</div>
+				<div class="wi">
+					<div class="wi-n">02</div>
+					<div class="wi-t">For the one who's been through fire and came back changed</div>
+				</div>
+				<div class="wi">
+					<div class="wi-n">03</div>
+					<div class="wi-t">For those who find peace only inside the storm</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="community">
+			<div class="comm-top">
+				<h3>The Sign of Pain Community</h3>
+				<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.3em;color:var(--dim)">48K+
+					TOTAL</span>
+			</div>
+			<div class="comm-grid">
+				<a href="https://tiktok.com/@thesignofpain" target="_blank" class="sg">
+					<div class="sg-n">25K</div>
+					<div class="sg-p">TikTok</div>
+					<div class="sg-f">Followers</div>
+				</a>
+				<a href="#" class="sg">
+					<div class="sg-n">10K</div>
+					<div class="sg-p">Facebook</div>
+					<div class="sg-f">Followers</div>
+				</a>
+				<a href="#" class="sg">
+					<div class="sg-n">8K</div>
+					<div class="sg-p">Instagram</div>
+					<div class="sg-f">Followers</div>
+				</a>
+				<a href="#" class="sg">
+					<div class="sg-n">5K</div>
+					<div class="sg-p">Snapchat</div>
+					<div class="sg-f">Followers</div>
+				</a>
+			</div>
+		</section>
+
+		<section id="next">
+			<div class="next-l">
+				<div>
+					<h2>Only<br>The<br><span>Beginning</span></h2>
+					<p style="margin-top:24px">More warriors. More stories. Each told by the man who lived it.</p>
+				</div>
+				<div class="vol2-box">
+					<span class="v2-label">Volume II — Coming Soon</span>
+					<span class="v2-num">II</span>
+				</div>
+			</div>
+			<div class="next-r">
+				<h3>Get Notified</h3>
+				<p>When the next warrior speaks, you'll be the first to know.</p>
+				<input type="email" class="email-input" placeholder="your@email.com">
+				<button class="btn-submit">Notify Me →</button>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<span class="f-logo">SIGN <span>OF</span> PAIN</span>
+		<span class="f-line">"All stories are fiction. All pain is real."</span>
+		<div class="f-socials">
+			<a href="https://tiktok.com/@thesignofpain" target="_blank">TikTok</a>
+			<a href="#">Instagram</a>
+			<a href="#">Facebook</a>
+		</div>
+	</footer>
+
+</body>
+
+</html>

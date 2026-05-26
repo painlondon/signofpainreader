@@ -103,6 +103,9 @@
 	font-size: 12px;
 	letter-spacing: 0.08em;
 }
+.setting:first-child .option {
+	@apply capitalize;
+}
 .option,
 .value {
 	@apply px-4;

@@ -1,4 +1,4 @@
-export type TypeReaderFontFamily = 'garamond' | 'sans' | 'serif' | 'mono'
+export type TypeReaderFontFamily = 'garamond' | 'sans' | 'cinzel' | 'lora'
 export type TypeReaderTextWidth = 'narrow' | 'normal' | 'wide'
 
 export type TypeReaderCover = {

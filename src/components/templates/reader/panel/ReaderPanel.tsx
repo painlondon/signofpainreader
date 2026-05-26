@@ -126,7 +126,7 @@ const ReaderPanel: FC<IReaderPanel> = ({
 						<div className={styles.setting}>
 							<div className={styles.label}>Font Family</div>
 							<div className={styles.options}>
-								{(['garamond', 'sans', 'serif', 'mono'] as const).map((f) => (
+								{(['garamond', 'sans', 'lora', 'cinzel'] as const).map((f) => (
 									<button
 										type="button"
 										key={f}
@@ -136,13 +136,7 @@ const ReaderPanel: FC<IReaderPanel> = ({
 										])}
 										onClick={() => setSettings({ fontFamily: f })}
 									>
-										{f === 'garamond'
-											? 'Garamond'
-											: f === 'sans'
-												? 'Sans'
-												: f === 'serif'
-													? 'Serif'
-													: 'Mono'}
+										{f}
 									</button>
 								))}
 							</div>

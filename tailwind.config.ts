@@ -8,6 +8,7 @@ export default {
 			cinzel: ['var(--font-cinzel), serif'],
 			garamond: ['var(--font-garamond), serif'],
 			sans: ['var(--font-sans), sans-serif'],
+			lora: ['var(--font-lora), sans-serif'],
 		},
 		colors: {
 			transparent: 'transparent',

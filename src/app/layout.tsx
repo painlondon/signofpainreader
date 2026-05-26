@@ -11,8 +11,16 @@ import Scripts from '@/components/layout/scripts/Scripts'
 import { useMenu } from '@/hooks/api/menu/useMenu.hook'
 import Provider from '@/providers/Provider'
 import type { Metadata, Viewport } from 'next'
-import { Cinzel, DM_Sans, EB_Garamond } from 'next/font/google'
+import { Cinzel, DM_Sans, EB_Garamond, Lora } from 'next/font/google'
 import type { PropsWithChildren } from 'react'
+
+const lora = Lora({
+	weight: ['400', '600', '700'],
+	display: 'swap',
+	subsets: ['latin'],
+	variable: '--font-lora',
+	fallback: ['Helvetica', 'Arial'],
+})
 
 const cinzel = Cinzel({
 	weight: ['400', '600', '700', '900'],
@@ -65,7 +73,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 	return (
 		<html lang="en">
 			<body
-				className={`${cinzel.variable} ${garamond.variable} ${sans.variable}`}
+				className={`${cinzel.variable} ${garamond.variable} ${sans.variable} ${lora.variable}`}
 			>
 				<Provider>
 					<Header header={header} />

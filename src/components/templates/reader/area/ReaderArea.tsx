@@ -1,5 +1,6 @@
 import Container from '@/components/common/container/Container'
 import type { IReaderArea } from '@/shared/interfaces/components/templates/reader/reader.interface'
+import { formatClassName } from '@/utils/formats/class-name/format-class-name.util'
 import type { FC } from 'react'
 import styles from './ReaderArea.module.scss'
 
@@ -35,9 +36,11 @@ const ReaderArea: FC<IReaderArea> = ({
 					</Container>
 					<Container size="full" className={styles.wrapper}>
 						<div
-							className={styles.content}
+							className={formatClassName([
+								styles.content,
+								`font-${settings.fontFamily}`,
+							])}
 							style={{
-								fontFamily: settings.fontFamily,
 								fontSize: `${settings.fontSize}px`,
 								lineHeight: `${settings.lineHeight}%`,
 							}}

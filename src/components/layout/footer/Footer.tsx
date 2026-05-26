@@ -10,7 +10,7 @@ const Footer: FC<IFooter> = ({ footer }) => {
 		<footer className={styles.footer}>
 			<Container size="full" className={styles.wrapper}>
 				<Logo className={styles.logo} />
-				<p className={styles.tagline}>"Pain is real."</p>
+				<p className={styles.tagline}>"This is the sign of your pain."</p>
 				{footer && (
 					<ul className={styles.list}>
 						{footer.items.map((item, index) => (
